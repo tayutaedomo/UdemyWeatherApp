@@ -56,9 +56,9 @@
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image0"
             android:layout_width="50dp"
-            android:layout_height="31dp"
-            andoird:android="@+id/image0" />
+            android:layout_height="31dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -92,9 +92,9 @@
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/image1"
             android:layout_width="50dp"
-            android:layout_height="31dp"
-            andoird:android="@+id/image1" />
+            android:layout_height="31dp" />
     </LinearLayout>
 
     <ScrollView
