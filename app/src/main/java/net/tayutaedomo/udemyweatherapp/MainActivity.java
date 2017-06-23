@@ -8,7 +8,9 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
     TextView mDateLabel0, mDateLabel1;
     TextView mTelop0, mTelop1;
 
+    NetworkImageView mImage0, mImage1;
+    ImageLoader mImageLoader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         mDateLabel1 = (TextView)findViewById(R.id.dateLabel1);
         mTelop0 = (TextView)findViewById(R.id.telop0);
         mTelop1 = (TextView)findViewById(R.id.telop1);
+        mImage0 = (NetworkImageView)findViewById(R.id.image0);
+        mImage1 = (NetworkImageView)findViewById(R.id.image1);
+        mImageLoader = MySingleton.getInstance(this).getImmageLoader();
 
         String url = "http://weather.livedoor.com/forecast/webservice/json/v1?city=140010";
 
@@ -51,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
                             mDateLabel1.setText(response.getJSONArray("forecasts").getJSONObject(1).getString("dateLabel"));
                             mTelop0.setText(response.getJSONArray("forecasts").getJSONObject(0).getString("telop"));
                             mTelop1.setText(response.getJSONArray("forecasts").getJSONObject(1).getString("telop"));
+
+                            String url0 = response.getJSONArray("forecasts").getJSONObject(0).getJSONObject("image").getString("url");
+                            mImage0.setImageUrl(url0, mImageLoader);
+                            String url1 = response.getJSONArray("forecasts").getJSONObject(1).getJSONObject("image").getString("url");
+                            mImage1.setImageUrl(url1, mImageLoader);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
